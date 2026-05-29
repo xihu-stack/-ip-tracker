@@ -38,31 +38,28 @@ else
     echo "[警告] 未检测到包管理器，请手动安装 Python 3"
 fi
 
-# ---------- 2. 复制文件 ----------
-echo "[2/5] 复制应用文件..."
-mkdir -p $APP_DIR
+# ---------- 2. 准备文件 ----------
+echo "[2/5] 准备应用文件..."
 
 # 获取脚本所在目录（支持直接克隆后运行）
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-# 复制 server 代码
-cp -r "$SCRIPT_DIR/server/"* $APP_DIR/
-
-# 复制前端构建产物
-mkdir -p $APP_DIR/frontend/dist
-if [ -d "$SCRIPT_DIR/frontend/dist" ]; then
-    cp -r "$SCRIPT_DIR/frontend/dist/"* $APP_DIR/frontend/dist/
-elif [ -d "$SCRIPT_DIR/deploy/frontend/dist" ]; then
-    cp -r "$SCRIPT_DIR/deploy/frontend/dist/"* $APP_DIR/frontend/dist/
+# 如果已在目标目录运行，直接使用；否则复制过去
+if [ "$SCRIPT_DIR" = "$APP_DIR" ]; then
+    echo "   → 已在 $APP_DIR，跳过复制"
 else
-    echo "[警告] 未找到前端构建产物，前端界面将不可用"
+    mkdir -p $APP_DIR
+    cp -r "$SCRIPT_DIR/server/"* $APP_DIR/
+    mkdir -p $APP_DIR/frontend/dist
+    if [ -d "$SCRIPT_DIR/frontend/dist" ]; then
+        cp -r "$SCRIPT_DIR/frontend/dist/"* $APP_DIR/frontend/dist/
+    else
+        echo "[警告] 未找到前端构建产物，前端界面将不可用"
+    fi
+    mkdir -p $APP_DIR/client
+    cp -r "$SCRIPT_DIR/client/"* $APP_DIR/client/ 2>/dev/null || true
+    echo "   → 文件已复制到 $APP_DIR"
 fi
-
-# 复制客户端部署脚本（方便后续下载）
-mkdir -p $APP_DIR/client
-cp -r "$SCRIPT_DIR/client/"* $APP_DIR/client/ 2>/dev/null || true
-
-echo "   → 文件已复制到 $APP_DIR"
 
 # ---------- 3. 创建虚拟环境 & 安装依赖 ----------
 echo "[3/5] 安装 Python 依赖..."
