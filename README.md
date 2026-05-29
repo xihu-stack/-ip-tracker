@@ -19,7 +19,7 @@
 │   └── dist/               # 构建产物（已提交，可直接部署）
 ├── client/                 # Windows 客户端部署脚本
 │   ├── deploy.ps1          # 一键安装
-│   └── uninstall.ps1       # 一键卸载
+│   └── clean_all_fixed.bat # 一键卸载
 └── install.sh              # ⭐ Linux 一键部署脚本
 ```
 
