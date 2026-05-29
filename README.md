@@ -29,7 +29,7 @@
 
 ```bash
 # 1. 克隆项目
-git clone https://github.com/xihu-stack/-ip-tracker.git
+git clone https://github.com/xihu-stack/ip-tracker.git
 
 # 2. 一键部署（默认 8000 端口）
 cd -ip-tracker
