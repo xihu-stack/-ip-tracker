@@ -18,8 +18,9 @@
 │   ├── src/                # 源码
 │   └── dist/               # 构建产物（已提交，可直接部署）
 ├── client/                 # Windows 客户端部署脚本
-├── install.sh              # ⭐ Linux 一键部署脚本
-└── deploy/                 # 旧版打包文件
+│   ├── deploy.ps1          # 一键安装
+│   └── uninstall.ps1       # 一键卸载
+└── install.sh              # ⭐ Linux 一键部署脚本
 ```
 
 ## 一键部署（Linux）

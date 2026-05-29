@@ -27,8 +27,3 @@ Thumbs.db
 
 # Logs
 *.log
-
-# Deploy cache
-deploy/server/__pycache__/
-deploy/server/routers/__pycache__/
-deploy/server/services/__pycache__/
